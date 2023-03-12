@@ -8,12 +8,21 @@ namespace CreditCard
 {
     class Card
     {
-        public string firstName { get; set; }   
+        public string cardType { get; set; }
+        public string firstName { get; set; }
         public string lastName { get; set; }
         public string email { get; set; }
         public virtual void ViewCardDetails()
         {
-            
+            while (true)
+            {
+                Console.WriteLine($"These are the {cardType} details, when you are done viewing, type 'done'.");
+                var done = Console.ReadLine();
+                if (done == "done")
+                {
+                    break;
+                }
+            }
         }
     }
     class Visa : Card
@@ -21,15 +30,8 @@ namespace CreditCard
         public int cardNum = 1;
         public override void ViewCardDetails()
         {
-            do
-            {
-                Console.WriteLine("These are the Visa details, when you are done viewing, type 'done'.");
-                var done = Console.ReadLine();
-                if (done == "done")
-                {
-                    break;
-                }
-            } while (true);
+            cardType = "Visa";
+            base.ViewCardDetails();
         }
     }
 
@@ -38,7 +40,8 @@ namespace CreditCard
         public int cardNum = 2;
         public override void ViewCardDetails()
         {
-            Console.WriteLine("These are the Mastercard details");
+            cardType = "Mastercard";
+            base.ViewCardDetails();
         }
     }
 
@@ -47,7 +50,8 @@ namespace CreditCard
         public int cardNum = 3;
         public override void ViewCardDetails()
         {
-            Console.WriteLine("These are the American Express details");
+            cardType = "American Express";
+            base.ViewCardDetails();
         }
     }
 

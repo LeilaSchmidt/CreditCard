@@ -31,10 +31,11 @@ namespace CreditCard
             } while (true);
 
             string cardType;
-            do
+            while(cardType != "ready")
             {
                 //user chooses between the 3 options
-                Console.WriteLine("Which credit card woudl you like to see the details for?");
+                Console.WriteLine("If you would like to see the card details, type the corresponding number.");
+                Console.WriteLine("Or, if you are ready to choose which card you'd like to apply for, type 'ready'.");
                 Console.WriteLine("1: VISA \n2: Mastercard \n3: American Express");
                 cardType = Console.ReadLine();
                 //Console.WriteLine($"you chose {cardType}.");
@@ -43,6 +44,8 @@ namespace CreditCard
 
                 switch (cardType)
                 {
+                    case "ready":
+                        break;
                     case "1":
                         visa.ViewCardDetails();
                     case "2":
@@ -53,7 +56,7 @@ namespace CreditCard
                         Console.WriteLine("I'm sorry, I did not understand that, please try again");
                         cardType = Console.ReadLine();
                 }
-            } while (cardType != "1" && cardType != "2" && cardType != "3");
+            } 
 
         end:
             Console.WriteLine("");
