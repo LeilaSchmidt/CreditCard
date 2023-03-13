@@ -94,6 +94,9 @@ namespace CreditCard
             card.firstName = firstName;
             card.lastName = lastName;
             card.memberSince = "2023";
+            card.GenerateCardNumber();
+            card.GenerateExpirationDate();
+            card.GenerateCVV();
 
             Console.WriteLine($"Card Type: {card.cardType}");
             Console.WriteLine($"First Name: {card.firstName}");
