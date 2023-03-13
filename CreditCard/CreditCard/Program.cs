@@ -62,7 +62,7 @@ namespace CreditCard
                 }
             }
 
-            card.CardChoice();
+            card.CardChoice(card);
 
         end:
             Console.WriteLine("");
