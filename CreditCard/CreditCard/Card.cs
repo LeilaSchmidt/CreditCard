@@ -9,6 +9,7 @@ namespace CreditCard
     class Card
     {
         public string cardType { get; set; }
+        public string userChoice { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string email { get; set; }
@@ -25,10 +26,28 @@ namespace CreditCard
                 }
             }
         }
+
+        public void CardChoice()
+        {
+            Console.WriteLine("Enter the corresponding number of the card type you'd like to choose. \n1: Visa \n2: Mastercard \n3:American Express?");
+            userChoice = Console.ReadLine();
+            switch (userChoice)
+            {
+                case "1":
+                    userChoice = "Visa";
+                    break;
+                case "2":
+                    userChoice = "Mastercard";
+                    break;
+                case "3":
+                    userChoice = "American Express";
+                    break;
+            }
+            Console.WriteLine($"you chose a {userChoice} card.");
+        }
     }
     class Visa : Card
     {
-        public int cardNum = 1;
         public override void ViewCardDetails()
         {
             cardType = "Visa";
@@ -38,7 +57,6 @@ namespace CreditCard
 
     class Mastercard : Card
     {
-        public int cardNum = 2;
         public override void ViewCardDetails()
         {
             cardType = "Mastercard";
@@ -48,7 +66,6 @@ namespace CreditCard
 
     class AmericanExpress : Card
     {
-        public int cardNum = 3;
         public override void ViewCardDetails()
         {
             cardType = "American Express";

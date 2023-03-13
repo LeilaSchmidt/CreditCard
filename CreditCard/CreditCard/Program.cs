@@ -30,7 +30,7 @@ namespace CreditCard
                 }
             } while (true);
 
-            string cardType;
+            string cardType = "";
             while(cardType != "ready")
             {
                 //user chooses between the 3 options
@@ -48,15 +48,21 @@ namespace CreditCard
                         break;
                     case "1":
                         visa.ViewCardDetails();
+                        break;
                     case "2":
                         mastercard.ViewCardDetails();
+                        break;
                     case "3":
                         americanExpress.ViewCardDetails();
+                        break;
                     default:
                         Console.WriteLine("I'm sorry, I did not understand that, please try again");
                         cardType = Console.ReadLine();
+                        break;
                 }
-            } 
+            }
+
+            card.CardChoice();
 
         end:
             Console.WriteLine("");
