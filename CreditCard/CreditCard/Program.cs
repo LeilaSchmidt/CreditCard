@@ -14,6 +14,7 @@ namespace CreditCard
 
 
             //asking the user if they want to apply for a credit card
+            Console.WriteLine("");
             Console.WriteLine("Hello, do you want to apply for a credit card?");
             var runProgram = Console.ReadLine();
             do
@@ -21,7 +22,7 @@ namespace CreditCard
                 if (runProgram.ToLower() != "yes" && runProgram.ToLower() != "y")
                 {
                     Console.WriteLine("okay, goodbye!");
-                    goto end;
+                    Environment.Exit(0);
                 }
                 else
                 {
@@ -36,6 +37,7 @@ namespace CreditCard
                 while (cardType != "ready")
                 {
                     //user chooses between the 3 options
+                    Console.WriteLine("");
                     Console.WriteLine("If you would like to see the card details, type the corresponding number.");
                     Console.WriteLine("Or, if you are ready to choose which card you'd like to apply for, type 'ready'.");
                     Console.WriteLine("1: VISA \n2: Mastercard \n3: American Express");
@@ -61,13 +63,15 @@ namespace CreditCard
                             americanExpress.ViewCardDetails();
                             americanExpress = null;
                             break;
-                        default:
-                            Console.WriteLine("I'm sorry, I did not understand that, please try again");
-                            cardType = Console.ReadLine();
-                            continue;
+                    }
+                    while (cardType != "ready" || cardType != "1" || cardType != "2" || cardType != "3")
+                    {
+                        Console.WriteLine("I'm sorry, I did not understand that, please try again");
+                        cardType = Console.ReadLine();
                     }
                 }
 
+                Console.WriteLine("");
                 Console.WriteLine("Enter the corresponding number of the card type you'd like to choose. \n1: Visa \n2: Mastercard \n3:American Express");
                 bool isValidChoice = false;
                 int userChoice = 0;
@@ -103,12 +107,13 @@ namespace CreditCard
                     Console.WriteLine($"You chose a {card.cardType} card.");
                 }
 
-
+                Console.WriteLine("");
                 Console.Write("Enter your first name: ");
                 string firstName = Console.ReadLine();
 
                 Console.Write("Enter your last name: ");
                 string lastName = Console.ReadLine();
+                Console.WriteLine("");
 
                 card.firstName = firstName;
                 card.lastName = lastName;
@@ -118,6 +123,7 @@ namespace CreditCard
 
                 card.printCardDetails(card);
 
+                Console.WriteLine("");
                 Console.WriteLine("Do you wish to apply for another card? ");
                 var anotherCard = Console.ReadLine();
                 switch (anotherCard)
@@ -137,8 +143,6 @@ namespace CreditCard
             {
                 obj.printCardDetails(obj);
             }
-        end:
-            Console.WriteLine("");
         }
     }
 }

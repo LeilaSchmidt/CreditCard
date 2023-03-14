@@ -23,6 +23,7 @@ namespace CreditCard
         {
             while (true)
             {
+                Console.WriteLine("");
                 Console.WriteLine($"These are the {cardType} details, when you are done viewing, type 'done'.");
                 Console.WriteLine($"{cardDetails}");
                 var done = Console.ReadLine();
@@ -44,10 +45,10 @@ namespace CreditCard
             int month = random.Next(1, 13);
             expirationDate = month.ToString().PadLeft(2, '0') + "/" + year.ToString().Substring(2, 2);
         }
-        public void GenerateCVV()
+        public virtual void GenerateCVV()
         {
             Random random = new Random();
-            cvv = random.Next(1000, 10000).ToString();
+            cvv = random.Next(100, 1000).ToString();
         }
         public virtual void printCardDetails(Card card)
         {
@@ -166,6 +167,11 @@ namespace CreditCard
         {
             specialCardNum = "3";
             base.GenerateCardNumber();
+        }
+        public override void GenerateCVV()
+        {
+            Random random = new Random();
+            cvv = random.Next(1000, 10000).ToString();
         }
         public override void printCardDetails(Card card)
         {
