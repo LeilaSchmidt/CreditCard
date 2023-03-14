@@ -6,23 +6,18 @@ using System.Threading.Tasks;
 
 namespace CreditCard
 {
-    abstract class Card
+    public abstract class Card
     {
         public string cardDetails { get; set; }
         public string cardType { get; set; }
         public string userChoice { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public string cardNumber;
-        public string expirationDate;
-        public string cvv;
-        public string memberSince;
-
-        public abstract void GenerateCardNumber();
-
-        public abstract void GenerateExpirationDate();
-
-        public abstract void GenerateCVV();
+        public string cardNumber { get; set; }
+        public string expirationDate { get; set; }
+        public string cvv { get; set; }
+        public string memberSince { get; set; }
+        public string specialCardNum { get; set; }
 
         public virtual void ViewCardDetails()
         {
@@ -37,33 +32,51 @@ namespace CreditCard
                 }
             }
         }
-    }
-    class Visa : Card
-    {
-        public override void ViewCardDetails()
-        {
-            cardType = "Visa";
-
-            base.ViewCardDetails();
-        }
-        public override void GenerateCardNumber()
+        public virtual void GenerateCardNumber()
         {
             Random random = new Random();
-            cardNumber = "4" + random.Next(100000000, 999999999).ToString() + "0000000";
+            cardNumber = specialCardNum + random.Next(100000000, 999999999).ToString() + "0000000";
         }
-
-        public override void GenerateExpirationDate()
+        public void GenerateExpirationDate()
         {
             Random random = new Random();
             int year = DateTime.Now.Year + random.Next(1, 6);
             int month = random.Next(1, 13);
             expirationDate = month.ToString().PadLeft(2, '0') + "/" + year.ToString().Substring(2, 2);
         }
-
-        public override void GenerateCVV()
+        public void GenerateCVV()
         {
             Random random = new Random();
-            cvv = random.Next(100, 1000).ToString();
+            cvv = random.Next(1000, 10000).ToString();
+        }
+        public virtual void printCardDetails(Card card)
+        {
+            Console.WriteLine("");
+            Console.WriteLine($"{card.cardType}");
+            Console.WriteLine("");
+            Console.WriteLine($"      {card.cardNumber}");
+            Console.WriteLine("");
+            Console.WriteLine($"{card.firstName} {card.lastName}    {card.memberSince} {card.expirationDate}");
+            Console.WriteLine("");
+            Console.WriteLine($"CVV: {card.cvv}");
+        }
+    }
+    class Visa : Card
+    {
+        public override void ViewCardDetails()
+        {
+            cardType = "Visa";
+            base.ViewCardDetails();
+        }
+        public override void GenerateCardNumber()
+        {
+            specialCardNum = "4";
+            base.GenerateCardNumber();
+        }
+        public override void printCardDetails(Card card) // Change the parameter type
+        {
+            memberSince = "";
+            base.printCardDetails(card); // Call the base implementation with the correct parameter type
         }
     }
 
@@ -76,22 +89,13 @@ namespace CreditCard
         }
         public override void GenerateCardNumber()
         {
-            Random random = new Random();
-            cardNumber = "5" + random.Next(100000000, 999999999).ToString() + "0000000";
+            specialCardNum = "5";
+            base.GenerateCardNumber();
         }
-
-        public override void GenerateExpirationDate()
+        public override void printCardDetails(Card card)
         {
-            Random random = new Random();
-            int year = DateTime.Now.Year + random.Next(1, 6);
-            int month = random.Next(1, 13);
-            expirationDate = month.ToString().PadLeft(2, '0') + "/" + year.ToString().Substring(2, 2);
-        }
-
-        public override void GenerateCVV()
-        {
-            Random random = new Random();
-            cvv = random.Next(100, 1000).ToString();
+            memberSince = "";
+            base.printCardDetails(card);
         }
     }
 
@@ -104,22 +108,15 @@ namespace CreditCard
         }
         public override void GenerateCardNumber()
         {
-            Random random = new Random();
-            cardNumber = "3" + random.Next(100000000, 999999999).ToString() + "000000";
+            specialCardNum = "3";
+            base.GenerateCardNumber();
         }
-
-        public override void GenerateExpirationDate()
+        public override void printCardDetails(Card card)
         {
-            Random random = new Random();
-            int year = DateTime.Now.Year + random.Next(1, 6);
-            int month = random.Next(1, 13);
-            expirationDate = month.ToString().PadLeft(2, '0') + "/" + year.ToString().Substring(2, 2);
-        }
 
-        public override void GenerateCVV()
-        {
-            Random random = new Random();
-            cvv = random.Next(1000, 10000).ToString();
+            card.memberSince = "2023";
+            base.printCardDetails(card);
+            Console.WriteLine($"Member Since: {memberSince}");
         }
     }
 }

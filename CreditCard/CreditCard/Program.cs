@@ -8,10 +8,8 @@ namespace CreditCard
     {
         static void Main(string[] args)
         {
-            Card card = new Card();
-            Visa visa = new Visa();
-            Mastercard mastercard = new Mastercard();
-            AmericanExpress americanExpress = new AmericanExpress();
+            List<Card> cards = new List<Card>();
+            Card card = null;
 
             //asking the user if they want to apply for a credit card
             Console.WriteLine("Hello, do you want to apply for a credit card?");
@@ -44,12 +42,15 @@ namespace CreditCard
                     case "ready":
                         break;
                     case "1":
+                        Visa visa = new Visa();
                         visa.ViewCardDetails();
                         break;
                     case "2":
+                        Mastercard mastercard = new Mastercard();
                         mastercard.ViewCardDetails();
                         break;
                     case "3":
+                        AmericanExpress americanExpress = new AmericanExpress();
                         americanExpress.ViewCardDetails();
                         break;
                     default:
@@ -64,15 +65,13 @@ namespace CreditCard
             switch (userChoice)
             {
                 case "1":
-                    card = new Mastercard();
-                    card.cardType = "Mastercard";
-                    break;
-
-                case "2":
                     card = new Visa();
                     card.cardType = "Visa";
                     break;
-
+                case "2":
+                    card = new Mastercard();
+                    card.cardType = "Mastercard";
+                    break;
                 case "3":
                     card = new AmericanExpress();
                     card.cardType = "American Express";
@@ -82,7 +81,11 @@ namespace CreditCard
                     Console.WriteLine("Invalid choice!");
                     return;
             }
-            Console.WriteLine($"you chose a {card.cardType} card.");
+            if (card != null)
+            {
+                cards.Add(card);
+                Console.WriteLine($"You chose a {card.cardType} card.");
+            }
 
 
             Console.Write("Enter your first name: ");
@@ -93,18 +96,11 @@ namespace CreditCard
 
             card.firstName = firstName;
             card.lastName = lastName;
-            card.memberSince = "2023";
             card.GenerateCardNumber();
             card.GenerateExpirationDate();
             card.GenerateCVV();
 
-            Console.WriteLine($"Card Type: {card.cardType}");
-            Console.WriteLine($"First Name: {card.firstName}");
-            Console.WriteLine($"Last Name: {card.lastName}");
-            Console.WriteLine($"Card Number: {card.cardNumber}");
-            Console.WriteLine($"Date of Expiration: {card.dateOfExpiraton}");
-            Console.WriteLine($"Member Since: {card.memberSince}");
-
+            card.printCardDetails(card);
 
         end:
             Console.WriteLine("");
