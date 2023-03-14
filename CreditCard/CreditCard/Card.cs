@@ -51,12 +51,13 @@ namespace CreditCard
         }
         public virtual void printCardDetails(Card card)
         {
-            Console.WriteLine("");
+            Console.WriteLine("Your newly created card: ");
+            Console.WriteLine("-------------------------------------------------");
             Console.WriteLine($"{card.cardType}");
             Console.WriteLine("");
             Console.WriteLine($"      {card.cardNumber}");
             Console.WriteLine("");
-            Console.WriteLine($"{card.firstName} {card.lastName}    {card.memberSince} {card.expirationDate}");
+            Console.WriteLine($"{card.firstName} {card.lastName}     {card.expirationDate}");
             Console.WriteLine("");
             Console.WriteLine($"CVV: {card.cvv}");
         }
@@ -66,17 +67,36 @@ namespace CreditCard
         public override void ViewCardDetails()
         {
             cardType = "Visa";
+            cardDetails = @"
+            Benefits:
+            - available in 200+ countries & territories
+            - credit, debit, and PIN card transactions
+            - card issued by third party, Visa responsible for transactions
+            - secure transactions
+            - good international acceptance
+            
+            Further tiered paying members benefits:
+            Tier 1:
+            - roadside dispatch
+            - emergency card replacement 
+            - emergency cash distribution
+
+            Tier 2:
+            - fine wine & food discount
+            - golf discounts 
+            - Visa luxury hotel collections
+
+            Tier 3: 
+            - priority pass lounge access
+            - return protection
+            - global entry statement credit
+                        ";
             base.ViewCardDetails();
         }
         public override void GenerateCardNumber()
         {
             specialCardNum = "4";
             base.GenerateCardNumber();
-        }
-        public override void printCardDetails(Card card) // Change the parameter type
-        {
-            memberSince = "";
-            base.printCardDetails(card); // Call the base implementation with the correct parameter type
         }
     }
 
@@ -85,17 +105,36 @@ namespace CreditCard
         public override void ViewCardDetails()
         {
             cardType = "Mastercard";
+            cardDetails = @"
+            Benefits:
+            - available in 210+ countries & territories
+            - credit, debit, and PIN card transactions
+            - card issued by third party, Mastercard responsible for transactions
+            - secure transactions
+            - good international acceptance
+            
+            Further tiered paying members benefits:
+            Tier 1:
+            - mastercard ID Theft protection 
+            - rental car insurance
+            - extended warranty
+
+            Tier 2:
+            - mastercard luxury hotels & resorts 
+            - fuel rewards network
+            - master rental insurance
+
+            Tier 3: 
+            - lyft credit 
+            - fandango discount 
+            - personal travel advisor
+                        ";
             base.ViewCardDetails();
         }
         public override void GenerateCardNumber()
         {
             specialCardNum = "5";
             base.GenerateCardNumber();
-        }
-        public override void printCardDetails(Card card)
-        {
-            memberSince = "";
-            base.printCardDetails(card);
         }
     }
 
@@ -104,6 +143,23 @@ namespace CreditCard
         public override void ViewCardDetails()
         {
             cardType = "American Express";
+            cardDetails = @"
+            Benefits:
+            - available in 160+ countries 
+            - credit card transactions
+            - card issued and transactions done by American Express
+            - amazing customer service
+            - secure transactions
+            - not great international acceptance
+            - need a 'good' credit score            
+
+            Further membership benefits:
+            (American Express only has one tier)
+            - cell phone coverage
+            - extended warranty 
+            - car rental loss/damage insurance
+            - return protection         
+                        ";
             base.ViewCardDetails();
         }
         public override void GenerateCardNumber()
@@ -113,7 +169,6 @@ namespace CreditCard
         }
         public override void printCardDetails(Card card)
         {
-
             card.memberSince = "2023";
             base.printCardDetails(card);
             Console.WriteLine($"Member Since: {memberSince}");
