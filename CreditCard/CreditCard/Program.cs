@@ -69,25 +69,33 @@ namespace CreditCard
                 }
 
                 Console.WriteLine("Enter the corresponding number of the card type you'd like to choose. \n1: Visa \n2: Mastercard \n3:American Express");
-                var userChoice = Console.ReadLine();
+                bool isValidChoice = false;
+                int userChoice = 0;
+                while (!isValidChoice)
+                {
+                    if (!int.TryParse(Console.ReadLine(), out userChoice) || userChoice < 1 || userChoice > 3)
+                    {
+                        Console.WriteLine("Invalid choice! Please enter a number between 1 and 3.");
+                    }
+                    else
+                    {
+                        isValidChoice = true;
+                    }
+                }
                 switch (userChoice)
                 {
-                    case "1":
+                    case 1:
                         card = new Visa();
                         card.cardType = "Visa";
                         break;
-                    case "2":
+                    case 2:
                         card = new Mastercard();
                         card.cardType = "Mastercard";
                         break;
-                    case "3":
+                    case 3:
                         card = new AmericanExpress();
                         card.cardType = "American Express";
                         break;
-
-                    default:
-                        Console.WriteLine("Invalid choice!");
-                        return;
                 }
                 if (card != null)
                 {
