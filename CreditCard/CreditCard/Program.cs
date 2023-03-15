@@ -51,24 +51,19 @@ namespace CreditCard
                         case "1":
                             Visa visa = new Visa();
                             visa.ViewCardDetails();
-                            visa = null;
                             break;
                         case "2":
                             Mastercard mastercard = new Mastercard();
                             mastercard.ViewCardDetails();
-                            mastercard = null;
                             break;
                         case "3":
                             AmericanExpress americanExpress = new AmericanExpress();
                             americanExpress.ViewCardDetails();
-                            americanExpress = null;
+                            break;
+                        default:
                             break;
                     }
-                    while (cardType != "ready" || cardType != "1" || cardType != "2" || cardType != "3")
-                    {
-                        Console.WriteLine("I'm sorry, I did not understand that, please try again");
-                        cardType = Console.ReadLine();
-                    }
+                
                 }
 
                 Console.WriteLine("");
@@ -90,15 +85,12 @@ namespace CreditCard
                 {
                     case 1:
                         card = new Visa();
-                        card.cardType = "Visa";
                         break;
                     case 2:
                         card = new Mastercard();
-                        card.cardType = "Mastercard";
                         break;
                     case 3:
                         card = new AmericanExpress();
-                        card.cardType = "American Express";
                         break;
                 }
                 if (card != null)

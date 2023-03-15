@@ -65,6 +65,10 @@ namespace CreditCard
     }
     class Visa : Card
     {
+        public Visa()
+        {
+            cardType = "Visa";
+        }
         public override void ViewCardDetails()
         {
             cardType = "Visa";
@@ -103,6 +107,10 @@ namespace CreditCard
 
     class Mastercard : Card
     {
+        public Mastercard()
+        {
+            cardType = "Mastercard";
+        }
         public override void ViewCardDetails()
         {
             cardType = "Mastercard";
@@ -139,8 +147,13 @@ namespace CreditCard
         }
     }
 
-    class AmericanExpress : Card
+    public class AmericanExpress : Card
     {
+        public AmericanExpress()
+        {
+            cardType = "American Express";
+        }
+        
         public override void ViewCardDetails()
         {
             cardType = "American Express";
