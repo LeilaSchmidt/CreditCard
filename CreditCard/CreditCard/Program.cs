@@ -30,13 +30,13 @@ namespace CreditCard
                 }
             } while (true);
 
-            //while the user
+            //while the user wants to make a card
             while (makeCard == true)
             {
                 string cardType = "";
+                //user chooses which card details they want to look at
                 while (cardType != "ready")
                 {
-                    //user chooses between the 3 options
                     Console.WriteLine("");
                     Console.WriteLine("If you would like to see the card details, type the corresponding number.");
                     Console.WriteLine("Or, if you are ready to choose which card you'd like to apply for, type 'ready'.");
@@ -63,7 +63,7 @@ namespace CreditCard
                         default:
                             break;
                     }
-                
+
                 }
 
                 Console.WriteLine("");
@@ -99,20 +99,15 @@ namespace CreditCard
                     Console.WriteLine($"You chose a {card.cardType} card.");
                 }
 
-                Console.WriteLine("");
-                Console.Write("Enter your first name: ");
+
+                Console.Write("\nEnter your first name: ");
                 string firstName = Console.ReadLine();
 
                 Console.Write("Enter your last name: ");
                 string lastName = Console.ReadLine();
                 Console.WriteLine("");
 
-                card.firstName = firstName;
-                card.lastName = lastName;
-                card.GenerateCardNumber();
-                card.GenerateExpirationDate();
-                card.GenerateCVV();
-
+                card.GenerateCard(firstName, lastName, card);
                 card.printCardDetails(card);
 
                 Console.WriteLine("");
@@ -131,6 +126,8 @@ namespace CreditCard
                 }
 
             }
+
+            //final print out details of each card created 
             foreach (Card obj in cards)
             {
                 obj.printCardDetails(obj);

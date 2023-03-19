@@ -11,12 +11,11 @@ namespace CreditCard
         public string cardDetails { get; set; }
         public string cardType { get; set; }
         public string userChoice { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string cardNumber { get; set; }
-        public string expirationDate { get; set; }
-        public string cvv { get; set; }
-        public string memberSince { get; set; }
+        protected string firstName { get; set; }
+        protected string lastName { get; set; }
+        protected string cardNumber { get; set; }
+        protected string expirationDate { get; set; }
+        protected string cvv { get; set; }
         public string specialCardNum { get; set; }
 
         public virtual void ViewCardDetails()
@@ -33,23 +32,24 @@ namespace CreditCard
                 }
             }
         }
-        public virtual void GenerateCardNumber()
+        public virtual void GenerateCard(string firstName, string lastName, Card card)
         {
+
+            card.firstName = firstName;
+            card.lastName = lastName;
+            //generate cardNumber
             Random random = new Random();
             cardNumber = specialCardNum + random.Next(100000000, 999999999).ToString() + "0000000";
-        }
-        public void GenerateExpirationDate()
-        {
-            Random random = new Random();
+
+            //Generate Expiration Date
             int year = DateTime.Now.Year + random.Next(1, 6);
             int month = random.Next(1, 13);
             expirationDate = month.ToString().PadLeft(2, '0') + "/" + year.ToString().Substring(2, 2);
-        }
-        public virtual void GenerateCVV()
-        {
-            Random random = new Random();
+
+            //Generate CVV
             cvv = random.Next(100, 1000).ToString();
         }
+
         public virtual void printCardDetails(Card card)
         {
             Console.WriteLine("Your newly created card: ");
@@ -98,10 +98,10 @@ namespace CreditCard
                         ";
             base.ViewCardDetails();
         }
-        public override void GenerateCardNumber()
+        public override void GenerateCard(string firstName, string lastName, Card card)
         {
             specialCardNum = "4";
-            base.GenerateCardNumber();
+            base.GenerateCard(firstName, lastName, card);
         }
     }
 
@@ -140,20 +140,21 @@ namespace CreditCard
                         ";
             base.ViewCardDetails();
         }
-        public override void GenerateCardNumber()
+        public override void GenerateCard(string firstName, string lastName, Card card)
         {
             specialCardNum = "5";
-            base.GenerateCardNumber();
+            base.GenerateCard(firstName, lastName, card);
         }
     }
 
     public class AmericanExpress : Card
     {
+        private string memberSince { get; set; }
         public AmericanExpress()
         {
             cardType = "American Express";
         }
-        
+
         public override void ViewCardDetails()
         {
             cardType = "American Express";
@@ -176,19 +177,16 @@ namespace CreditCard
                         ";
             base.ViewCardDetails();
         }
-        public override void GenerateCardNumber()
+        public override void GenerateCard(string firstName, string lastName, Card card)
         {
             specialCardNum = "3";
-            base.GenerateCardNumber();
-        }
-        public override void GenerateCVV()
-        {
+            base.GenerateCard(firstName, lastName, card);
             Random random = new Random();
             cvv = random.Next(1000, 10000).ToString();
         }
         public override void printCardDetails(Card card)
         {
-            card.memberSince = "2023";
+            memberSince = "2023";
             base.printCardDetails(card);
             Console.WriteLine($"Member Since: {memberSince}");
         }
