@@ -8,13 +8,11 @@ namespace CreditCard
     {
         static void Main(string[] args)
         {
-            List<Card> cards = new List<Card>();
+            //initialize card and wallet
+            Wallet wallet = new Wallet();
             Card card = null;
-            bool makeCard = true;
-
 
             //asking the user if they want to apply for a credit card
-            Console.WriteLine("");
             Console.WriteLine("Hello, do you want to apply for a credit card?");
             var runProgram = Console.ReadLine();
             do
@@ -30,21 +28,23 @@ namespace CreditCard
                 }
             } while (true);
 
+
+            bool makeCard = true;
             //while the user wants to make a card
-            while (makeCard == true)
+            do
             {
-                string cardType = "";
+                var userChoice = "";
                 //user chooses which card details they want to look at
-                while (cardType != "ready")
+                while (userChoice != "ready")
                 {
                     Console.WriteLine("");
                     Console.WriteLine("If you would like to see the card details, type the corresponding number.");
                     Console.WriteLine("Or, if you are ready to choose which card you'd like to apply for, type 'ready'.");
                     Console.WriteLine("1: VISA \n2: Mastercard \n3: American Express");
-                    cardType = Console.ReadLine();
+                    userChoice = Console.ReadLine();
 
                     //user choice triggers the equivalent card types
-                    switch (cardType)
+                    switch (userChoice)
                     {
                         case "ready":
                             break;
@@ -60,19 +60,20 @@ namespace CreditCard
                             AmericanExpress americanExpress = new AmericanExpress();
                             americanExpress.ViewCardDetails();
                             break;
+                        case "done":
+                            continue;
                         default:
                             break;
                     }
 
                 }
 
-                Console.WriteLine("");
-                Console.WriteLine("Enter the corresponding number of the card type you'd like to choose. \n1: Visa \n2: Mastercard \n3:American Express");
+                Console.WriteLine("\nEnter the corresponding number of the card type you'd like to choose. \n1: Visa \n2: Mastercard \n3:American Express");
                 bool isValidChoice = false;
-                int userChoice = 0;
+                int cardChoice = 0;
                 while (!isValidChoice)
                 {
-                    if (!int.TryParse(Console.ReadLine(), out userChoice) || userChoice < 1 || userChoice > 3)
+                    if (!int.TryParse(Console.ReadLine(), out cardChoice) || cardChoice < 1 || cardChoice > 3)
                     {
                         Console.WriteLine("Invalid choice! Please enter a number between 1 and 3.");
                     }
@@ -81,7 +82,7 @@ namespace CreditCard
                         isValidChoice = true;
                     }
                 }
-                switch (userChoice)
+                switch (cardChoice)
                 {
                     case 1:
                         card = new Visa();
@@ -93,25 +94,22 @@ namespace CreditCard
                         card = new AmericanExpress();
                         break;
                 }
+
                 if (card != null)
                 {
-                    cards.Add(card);
-                    Console.WriteLine($"You chose a {card.cardType} card.");
+                    wallet.StoreCard(card);
                 }
 
 
                 Console.Write("\nEnter your first name: ");
                 string firstName = Console.ReadLine();
-
                 Console.Write("Enter your last name: ");
                 string lastName = Console.ReadLine();
-                Console.WriteLine("");
 
                 card.GenerateCard(firstName, lastName, card);
                 card.printCardDetails(card);
 
-                Console.WriteLine("");
-                Console.WriteLine("Do you wish to apply for another card? ");
+                Console.WriteLine("\nDo you wish to apply for another card? ");
                 var anotherCard = Console.ReadLine();
                 switch (anotherCard)
                 {
@@ -119,19 +117,15 @@ namespace CreditCard
                         makeCard = false;
                         break;
                     case "yes":
+                        makeCard = true;
                         continue;
                     default:
                         makeCard = false;
                         break;
                 }
-
-            }
-
-            //final print out details of each card created 
-            foreach (Card obj in cards)
-            {
-                obj.printCardDetails(obj);
-            }
+            } while (makeCard == true);
+            //print out all cards in the wallet
+            wallet.PrintWallet();
         }
     }
 }

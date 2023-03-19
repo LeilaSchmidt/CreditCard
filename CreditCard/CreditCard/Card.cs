@@ -8,15 +8,16 @@ namespace CreditCard
 {
     public abstract class Card
     {
-        public string cardDetails { get; set; }
+        protected Random random = new Random();
         public string cardType { get; set; }
-        public string userChoice { get; set; }
-        protected string firstName { get; set; }
-        protected string lastName { get; set; }
-        protected string cardNumber { get; set; }
-        protected string expirationDate { get; set; }
+        protected string cardDetails { get; set; }
+        protected string userChoice { get; set; }
+        private string firstName { get; set; }
+        private string lastName { get; set; }
+        private string cardNumber { get; set; }
+        protected string specialCardNum { get; set; }
+        private string expirationDate { get; set; }
         protected string cvv { get; set; }
-        public string specialCardNum { get; set; }
 
         public virtual void ViewCardDetails()
         {
@@ -34,11 +35,10 @@ namespace CreditCard
         }
         public virtual void GenerateCard(string firstName, string lastName, Card card)
         {
-
+            //assign first and last name
             card.firstName = firstName;
             card.lastName = lastName;
             //generate cardNumber
-            Random random = new Random();
             cardNumber = specialCardNum + random.Next(100000000, 999999999).ToString() + "0000000";
 
             //Generate Expiration Date
@@ -52,7 +52,7 @@ namespace CreditCard
 
         public virtual void printCardDetails(Card card)
         {
-            Console.WriteLine("Your newly created card: ");
+            Console.WriteLine("\n\nYour newly created card: ");
             Console.WriteLine("-------------------------------------------------");
             Console.WriteLine($"{card.cardType}");
             Console.WriteLine("");
@@ -63,15 +63,31 @@ namespace CreditCard
             Console.WriteLine($"CVV: {card.cvv}");
         }
     }
+    class Wallet : Card
+    {
+        private List<Card> cards = new List<Card>();
+        public void StoreCard(Card card)
+        {
+            cards.Add(card);
+            Console.WriteLine($"You chose a {card.cardType} card.");
+        }
+        public void PrintWallet()
+        {
+            Console.WriteLine("You created the following cards: ");
+            //final print out details of each card created 
+            foreach (Card obj in cards)
+            {
+                obj.printCardDetails(obj);
+            }
+            Console.WriteLine("\nGoodbye!");
+        }
+    }
     class Visa : Card
     {
         public Visa()
         {
             cardType = "Visa";
-        }
-        public override void ViewCardDetails()
-        {
-            cardType = "Visa";
+            specialCardNum = "4";
             cardDetails = @"
             Benefits:
             - available in 200+ countries & territories
@@ -96,12 +112,6 @@ namespace CreditCard
             - return protection
             - global entry statement credit
                         ";
-            base.ViewCardDetails();
-        }
-        public override void GenerateCard(string firstName, string lastName, Card card)
-        {
-            specialCardNum = "4";
-            base.GenerateCard(firstName, lastName, card);
         }
     }
 
@@ -110,10 +120,7 @@ namespace CreditCard
         public Mastercard()
         {
             cardType = "Mastercard";
-        }
-        public override void ViewCardDetails()
-        {
-            cardType = "Mastercard";
+            specialCardNum = "5";
             cardDetails = @"
             Benefits:
             - available in 210+ countries & territories
@@ -138,12 +145,6 @@ namespace CreditCard
             - fandango discount 
             - personal travel advisor
                         ";
-            base.ViewCardDetails();
-        }
-        public override void GenerateCard(string firstName, string lastName, Card card)
-        {
-            specialCardNum = "5";
-            base.GenerateCard(firstName, lastName, card);
         }
     }
 
@@ -153,11 +154,8 @@ namespace CreditCard
         public AmericanExpress()
         {
             cardType = "American Express";
-        }
-
-        public override void ViewCardDetails()
-        {
-            cardType = "American Express";
+            specialCardNum = "3";
+            memberSince = "2023";
             cardDetails = @"
             Benefits:
             - available in 160+ countries 
@@ -175,18 +173,15 @@ namespace CreditCard
             - car rental loss/damage insurance
             - return protection         
                         ";
-            base.ViewCardDetails();
         }
+
         public override void GenerateCard(string firstName, string lastName, Card card)
         {
-            specialCardNum = "3";
             base.GenerateCard(firstName, lastName, card);
-            Random random = new Random();
             cvv = random.Next(1000, 10000).ToString();
         }
         public override void printCardDetails(Card card)
         {
-            memberSince = "2023";
             base.printCardDetails(card);
             Console.WriteLine($"Member Since: {memberSince}");
         }
