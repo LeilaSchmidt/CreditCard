@@ -73,7 +73,14 @@ namespace CreditCard
         {
             Console.WriteLine("Hello, do you want to apply for a credit card?");
             var runProgram = Console.ReadLine();
-            if (runProgram.ToLower() != "yes" && runProgram.ToLower() != "y")
+
+            while (runProgram.ToLower() != "yes" && runProgram.ToLower() != "y" && runProgram.ToLower() != "no" && runProgram.ToLower() != "n")
+            {
+                Console.WriteLine("Invalid input! Please enter 'yes' or 'no'");
+                runProgram = Console.ReadLine();
+            }
+
+            if (runProgram.ToLower() == "no" || runProgram.ToLower() == "n")
             {
                 Console.WriteLine("okay, goodbye!");
                 Environment.Exit(0);
@@ -83,6 +90,12 @@ namespace CreditCard
         public Card UserCardChoice(string userChoice, int version, Wallet wallet)
         {
             Card card = null;
+            while (userChoice != "ready" && userChoice != "1" && userChoice != "2" && userChoice != "3" && userChoice != "done")
+            {
+                Console.WriteLine("Invalid input! Please enter a valid choice.");
+                userChoice = Console.ReadLine();
+            }
+
             //user choice triggers the equivalent card types
             switch (userChoice)
             {
