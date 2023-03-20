@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace CreditCard
     public abstract class Card
     {
         protected Random random = new Random();
-        public string cardType { get; set; }
+        public string cardType { get; set; }                        //change THIS
         protected string cardDetails { get; set; }
         protected string userChoice { get; set; }
         private string firstName { get; set; }
@@ -63,13 +64,87 @@ namespace CreditCard
             Console.WriteLine($"CVV: {card.cvv}");
         }
     }
-    class Wallet : Card
+
+    //Wallet Class
+    class Wallet
     {
         private List<Card> cards = new List<Card>();
+        public void CreateCard()
+        {
+            Console.WriteLine("Hello, do you want to apply for a credit card?");
+            var runProgram = Console.ReadLine();
+            if (runProgram.ToLower() != "yes" && runProgram.ToLower() != "y")
+            {
+                Console.WriteLine("okay, goodbye!");
+                Environment.Exit(0);
+            }
+        }
+
+        public Card UserCardChoice(string userChoice, int version, Wallet wallet)
+        {
+            Card card = null;
+            //user choice triggers the equivalent card types
+            switch (userChoice)
+            {
+                case "ready":
+                    return null;
+                case "1":
+                    card = new Visa();
+                    break;
+                case "2":
+                    card = new Mastercard();
+                    break;
+                case "3":
+                    card = new AmericanExpress();
+                    break;
+                case "done":
+                    return null;
+            }
+            if (version == 1)
+            {
+                card.ViewCardDetails();
+                return null;
+            }
+            else if (version == 2)
+            {
+                //first and last name
+                Console.Write("\nEnter your first name: ");
+                string firstName = Console.ReadLine();
+                Console.Write("Enter your last name: ");
+                string lastName = Console.ReadLine();
+
+                card.GenerateCard(firstName, lastName, card);
+                card.printCardDetails(card);
+                wallet.StoreCard(card);
+                return card;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public void StoreCard(Card card)
         {
             cards.Add(card);
             Console.WriteLine($"You chose a {card.cardType} card.");
+        }
+
+        public bool AnotherCard(bool makeCard)
+        {
+            Console.WriteLine($"\nDo you wish to apply for a card? ");
+            var anotherCard = Console.ReadLine();
+            switch (anotherCard)
+            {
+                case "no":
+                    makeCard = false;
+                    return makeCard;
+                case "yes":
+                    return true;
+                default:
+                    makeCard = false;
+                    return makeCard;
+            }
         }
         public void PrintWallet()
         {
