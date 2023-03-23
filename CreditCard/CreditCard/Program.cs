@@ -10,12 +10,23 @@ namespace CreditCard
         {
             //initialize card and wallet
             Wallet wallet = new Wallet();
-
+            bool makeCard = false;
             //asking the user if they want to apply for a credit card
-            wallet.CreateCard();
+            Console.WriteLine("Hello, do you want to apply for a credit card?");
+            string runProgram = Console.ReadLine();
+            if (wallet.startProgram(runProgram) == false)
+            {
+                Console.WriteLine("Okay, Goodbye!");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Great, let's get started!");
+                makeCard = true;
+            }
 
             //while the user wants to make a card
-            bool makeCard = true;
+            
             do
             {
                 //user chooses which card details they want to look at
@@ -28,13 +39,13 @@ namespace CreditCard
                     Console.WriteLine("1: VISA \n2: Mastercard \n3: American Express");
                     userChoice = Console.ReadLine();
 
-                    wallet.UserCardChoice(userChoice, version, wallet);
+                    wallet.UserCardChoice(userChoice, version);
                 }
 
                 version = 2;
                 Console.WriteLine("\nEnter the corresponding number of the card type you'd like to choose. \n1: Visa \n2: Mastercard \n3:American Express");
                 var cardChoice = Console.ReadLine();
-                wallet.UserCardChoice(cardChoice, version, wallet);
+                wallet.UserCardChoice(cardChoice, version);
 
                 //Apply for another card?
                 makeCard = wallet.AnotherCard(makeCard);
