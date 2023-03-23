@@ -10,7 +10,7 @@ namespace CreditCard
     public abstract class Card
     {
         protected Random random = new Random();
-        public string cardType { get; set; }                        //change THIS
+        protected string cardType { get; set; }                        //change THIS
         protected string cardDetails { get; set; }
         protected string userChoice { get; set; }
         private string firstName { get; set; }
@@ -19,6 +19,14 @@ namespace CreditCard
         protected string specialCardNum { get; set; }
         private string expirationDate { get; set; }
         protected string cvv { get; set; }
+        public Card()
+        {
+            this.cardType = cardType;
+        }
+        public string GetCardType()
+        {
+            return cardType;
+        }
 
         public virtual void ViewCardDetails()
         {
@@ -50,7 +58,7 @@ namespace CreditCard
             //Generate CVV
             cvv = random.Next(100, 1000).ToString();
         }
-
+        
         public virtual void printCardDetails(Card card)
         {
             Console.WriteLine("\n\nYour newly created card: ");
@@ -140,7 +148,7 @@ namespace CreditCard
         public void StoreCard(Card card)
         {
             cards.Add(card);
-            Console.WriteLine($"You chose a {card.cardType} card.");
+            Console.WriteLine($"You chose a {card.GetCardType()} card.");
         }
 
         public bool AnotherCard(bool makeCard)
