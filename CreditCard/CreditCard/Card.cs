@@ -35,14 +35,16 @@ namespace CreditCard
                 Console.WriteLine("");
                 Console.WriteLine($"These are the {cardType} details, when you are done viewing, type 'done'.");
                 Console.WriteLine($"{cardDetails}");
-                var done = Console.ReadLine();
-                if (done == "done")
+                string done = Console.ReadLine();
+                while (done.ToLower() != "done")
                 {
-                    break;
+                    Console.WriteLine("Invalid input! Please enter a valid choice.");
+                    done = Console.ReadLine();
                 }
+                break;
             }
         }
-        public virtual void GenerateCard(string firstName, string lastName, Card card)
+        public virtual bool GenerateCard(string firstName, string lastName, Card card)
         {
             //assign first and last name
             card.firstName = firstName;
@@ -57,6 +59,16 @@ namespace CreditCard
 
             //Generate CVV
             cvv = random.Next(100, 1000).ToString();
+
+            // check if cardNumber, expirationDate, and cvv were successfully generated
+            if (!string.IsNullOrEmpty(cardNumber) && !string.IsNullOrEmpty(expirationDate) && !string.IsNullOrEmpty(cvv))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public virtual void printCardDetails(Card card)
@@ -133,10 +145,18 @@ namespace CreditCard
                 Console.Write("Enter your last name: ");
                 string lastName = Console.ReadLine();
 
-                card.GenerateCard(firstName, lastName, card);
-                card.printCardDetails(card);
-                StoreCard(card);
-                return card;
+                if (card.GenerateCard(firstName, lastName, card))
+                {
+                    card.printCardDetails(card);
+                    StoreCard(card);
+                    Console.WriteLine("Card successfully generated.");
+                    return card;
+                }
+                else
+                {
+                    Console.WriteLine("Failed to generate card.");
+                    return null;
+                }
             }
             else
             {
@@ -154,6 +174,12 @@ namespace CreditCard
         {
             Console.WriteLine($"\nDo you wish to apply for a card? ");
             var anotherCard = Console.ReadLine();
+            while(anotherCard.ToLower() != "no" && anotherCard.ToLower() != "yes")
+            {
+                Console.WriteLine("Invalid input! Please enter 'yes' or 'no'");
+                anotherCard = Console.ReadLine();
+            }
+
             switch (anotherCard)
             {
                 case "no":
@@ -270,10 +296,11 @@ namespace CreditCard
                         ";
         }
 
-        public override void GenerateCard(string firstName, string lastName, Card card)
+        public override bool GenerateCard(string firstName, string lastName, Card card)
         {
             base.GenerateCard(firstName, lastName, card);
             cvv = random.Next(1000, 10000).ToString();
+            return true;
         }
         public override void printCardDetails(Card card)
         {
