@@ -142,8 +142,18 @@ namespace CreditCard
                 //first and last name
                 Console.Write("\nEnter your first name: ");
                 string firstName = Console.ReadLine();
+                while (firstName == null)
+                {
+                    Console.WriteLine("I'm sorry, it appears you didn't enter your first name correctly. Please try again. ");
+                    firstName = Console.ReadLine();
+                }
                 Console.Write("Enter your last name: ");
                 string lastName = Console.ReadLine();
+                while (lastName == null)
+                {
+                    Console.WriteLine("I'm sorry, it appears you didn't enter your last name correctly. Please try again. ");
+                    lastName = Console.ReadLine();
+                }
 
                 if (card.GenerateCard(firstName, lastName, card))
                 {
@@ -174,7 +184,7 @@ namespace CreditCard
         {
             Console.WriteLine($"\nDo you wish to apply for a card? ");
             var anotherCard = Console.ReadLine();
-            while(anotherCard.ToLower() != "no" && anotherCard.ToLower() != "yes")
+            while (anotherCard.ToLower() != "no" && anotherCard.ToLower() != "yes")
             {
                 Console.WriteLine("Invalid input! Please enter 'yes' or 'no'");
                 anotherCard = Console.ReadLine();

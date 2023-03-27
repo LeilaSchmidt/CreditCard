@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Leila\\Source\\Repos\\CreditCarddd\\CreditCard\\CreditCard\\CreditCard.csproj": {}
+    "C:\\Users\\theka\\Source\\Repos\\CreditCardddd\\CreditCard\\CreditCard\\CreditCard.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Leila\\Source\\Repos\\CreditCarddd\\CreditCard\\CreditCard\\CreditCard.csproj": {
+    "C:\\Users\\theka\\Source\\Repos\\CreditCardddd\\CreditCard\\CreditCard\\CreditCard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Leila\\Source\\Repos\\CreditCarddd\\CreditCard\\CreditCard\\CreditCard.csproj",
+        "projectUniqueName": "C:\\Users\\theka\\Source\\Repos\\CreditCardddd\\CreditCard\\CreditCard\\CreditCard.csproj",
         "projectName": "CreditCard",
-        "projectPath": "C:\\Users\\Leila\\Source\\Repos\\CreditCarddd\\CreditCard\\CreditCard\\CreditCard.csproj",
-        "packagesPath": "C:\\Users\\Leila\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Leila\\Source\\Repos\\CreditCarddd\\CreditCard\\CreditCard\\obj\\",
+        "projectPath": "C:\\Users\\theka\\Source\\Repos\\CreditCardddd\\CreditCard\\CreditCard\\CreditCard.csproj",
+        "packagesPath": "C:\\Users\\theka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\theka\\Source\\Repos\\CreditCardddd\\CreditCard\\CreditCard\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Leila\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\theka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

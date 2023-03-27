@@ -45,6 +45,11 @@ namespace CreditCard
                 version = 2;
                 Console.WriteLine("\nEnter the corresponding number of the card type you'd like to choose. \n1: Visa \n2: Mastercard \n3:American Express");
                 var cardChoice = Console.ReadLine();
+                while(cardChoice != "1" && cardChoice != "2" && cardChoice != "3")
+                {
+                    Console.WriteLine("I'm sorry, you must enter either '1', '2', or '3'. Please try again");
+                    cardChoice = Console.ReadLine();
+                }
                 wallet.UserCardChoice(cardChoice, version);
 
                 //Apply for another card?
