@@ -26,7 +26,6 @@ namespace CreditCard
             }
 
             //while the user wants to make a card
-            
             do
             {
                 //user chooses which card details they want to look at
